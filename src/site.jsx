@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
+import { playUrl as play } from './app-config.mjs'
 
 const email = 'helppdfcompressor@gmail.com'
-const play = 'https://play.google.com/store/apps/details?id=com.pdfcompressorex.mobileapp'
 const subscriptions = 'https://play.google.com/store/account/subscriptions'
 const googlePrivacy = 'https://policies.google.com/privacy'
 const githubPrivacy = 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement'
@@ -75,7 +75,7 @@ function Layout({ page, root, publicUrl, children }) {
       {publicUrl && <meta property="og:image" content={new URL('assets/app-icon.png', publicUrl).href} />}
       <link rel="icon" type="image/png" href={asset('app-icon.png')} />
       <link rel="stylesheet" href={root + 'site.css'} />
-      <script src={root + 'site.js'} defer="" />
+      <script src={root + 'site.js'} defer />
     </head>
     <body>
       <a className="skip-link" href="#main">Skip to content</a>
@@ -169,7 +169,7 @@ function Home({ href, asset }) {
     <section className="wrap hero">
       <div className="hero-content">
         <span className="hero-pill"><span className="status-dot" /> A lighter way to PDF <span>FOR ANDROID</span></span>
-        <h1>Big ideas.<br /><em>Smaller PDFs.</em><span className="hero-spark">✳</span></h1>
+        <h1>Big ideas.<br /><em>Smaller PDFs.</em><span className="hero-spark" aria-hidden="true">✳</span></h1>
         <p>Keep the document. Lose the extra weight. Compress your PDFs on Android and get back to sharing what matters.</p>
         <div className="button-row">
           <PlayLink />

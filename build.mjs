@@ -1,5 +1,7 @@
 import { cp, mkdir, rm, writeFile } from 'node:fs/promises'
 import { build } from 'esbuild'
+import QRCode from 'qrcode'
+import { playUrl } from './src/app-config.mjs'
 
 const project = new URL('./', import.meta.url)
 const dist = new URL('dist/', project)
@@ -26,6 +28,10 @@ const pages = renderPages(siteUrl)
 
 await mkdir(dist, { recursive: true })
 await cp(new URL('public/', project), dist, { recursive: true })
+// Generate a self-hosted QR from the same destination as every download link.
+const qrOptions = { errorCorrectionLevel: 'M', margin: 4, width: 408, color: { dark: '#252821', light: '#ffffff' } }
+await writeFile(new URL('assets/google-play-qr.svg', dist), await QRCode.toString(playUrl, { ...qrOptions, type: 'svg' }))
+await writeFile(new URL('assets/google-play-qr.png', dist), await QRCode.toBuffer(playUrl, qrOptions))
 await writeFile(new URL('.nojekyll', dist), '')
 
 for (const { path, html } of pages) {

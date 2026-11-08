@@ -14,6 +14,10 @@ npm run preview
 
 Open http://127.0.0.1:4173/. To simulate a repository URL, set `PREVIEW_BASE` to the repository name before running preview.
 
+On Windows PowerShell, use `npm.cmd` in place of `npm` if script execution is disabled.
+
+The Google Play destination is set in `src/app-config.mjs`. Each build generates local SVG and PNG QR codes in `dist/assets/` from that same URL. The homepage phone illustration includes an interactive compression-strength example; its sample sizes are illustrative, and actual compression happens in the Android app.
+
 ## Publish on GitHub Pages
 
 1. Create a separate GitHub repository for the website. Upload the contents of this folder to its root, including the hidden `.github` folder. GitHub Free supports Pages from public repositories.
